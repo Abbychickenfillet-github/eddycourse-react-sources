@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      #myFiles {
+          display: none; /* 隱藏文件輸入 */
+      }
+      .container {
+          min-height: 200px;
+          width: 200px;
+          border: 2px dashed #4CAF50; /* 使用虛線邊框 */
+          border-radius: 50%; /* 使容器圓形 */
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          position: relative; /* 使預覽圖可以在容器內絕對定位 */
+          cursor: pointer; /* 游標變為手形 */
+          overflow: hidden; /* 隱藏溢出的部分 */
+          background-color: #b572d9;
+      }
+      .preview {
+          width: 100%;
+          height: 100%;
+          border-radius: 50%; /* 使預覽圖圓形 */
+          object-fit: cover; /* 確保圖片不變形 */
+          display: none; /* 預設隱藏預覽圖 */
+      }
+      .prompt {
+          position: absolute;
+          text-align: center;
+          color: #666;
+          font-size: 16px;
+      }
+              /* 第一種：鑽石邊框 */
+        .diamond-border {
+          border: 5px solid transparent;
+          border-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYyIiBoZWlnaHQ9IjE2MiIgdmlld0JveD0iMCAwIDE2MiAxNjIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy/") 20 stretch;
+          position: relative;
+        }
+
+      /* 第二種：金色邊框 */
+            .gold-border {
+          border: 5px solid transparent;
+          border-image: linear-gradient(45deg, #f1c40f, #e67e22) 1;
+          border-radius: 20px;
+      }
+
+      /* 第三種：銀色邊框 */
+      .silver-border {
+          border: 5px solid rgba(192, 192, 192, 0.8);
+          border-radius: 10px;
+          box-shadow: 0 0 10px rgba(192, 192, 192, 0.5);
+      }
+
+      /* 第四種：銅色邊框 */
+      .copper-border{
+          border: 5px solid #b87333;
+          border-radius: 10px;
+          box-shadow: 0 0 10px rgba(184, 115, 51, 0.5);
+      }
+    </style>
+    <title>FileReader 1</title>
+  </head>
+  <body>
+    <input type="file" name="myFiles" id="myFiles" accept="image/*" multiple />
+    <div class="container" id="container">
+      <img class="preview" id="preview" src="" alt="Image Preview" />
+      <div class="prompt">點擊或拖放上傳大頭貼</div>
+      
+    </div>
+    <div class="container diamond-border"></div>
+        <div class="preview">鑽石邊框</div>
+    </div>
+
+    <div class="container gold-border">
+        <div class="preview">金色邊框</div>
+    </div>
+
+    <div class="container silver-border">
+        <div class="preview">銀色邊框</div>
+    </div>
+
+    <div class="container copper-border">
+        <div class="preview">銅色邊框</div>
+    </div>
+    <svg><use href="#diamond-svg"/></svg>
+    <svg width="162" height="162" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+      <pattern id="diamond-pattern" patternUnits="userSpaceOnUse" width="20" height="20">
+          <polygon points="10,0 20,10 10,20 0,10" fill="lightblue"/>
+      </pattern>
+  </defs>
+  <rect x="0" y="0" width="162" height="162" fill="url(#diamond-pattern)"/>
+</svg>
+    <script>
+      const container = document.getElementById("container");
+      const myFiles = document.getElementById("myFiles");
+      const preview = document.getElementById("preview");
+
+      // 點擊容器時觸發文件選擇
+      container.addEventListener("click", () => {
+        myFiles.click();
+      });
+
+      // 當選擇文件時
+      myFiles.addEventListener("change", (e) => {
+        const file = e.currentTarget.files[0]; // 獲取第一個文件
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = (event) => {
+            preview.src = event.target.result; // 將預覽圖設置為讀取的圖片
+            preview.style.display = "block"; // 顯示預覽圖
+          };
+          reader.readAsDataURL(file); // 讀取文件為DataURL
+        }
+      });
+      
+
+    </script>
+  </body>
+</html>

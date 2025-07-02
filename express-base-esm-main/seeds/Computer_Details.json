@@ -1,0 +1,32 @@
+[
+    {
+        "id":1,
+        "color":"pink",
+        "img":"566416165.jpg",
+        "Input_ports":5
+    },
+    {
+        "id":2,
+        "color":"pink",
+        "img":"566416165.jpg",
+        "Input_ports":5
+    },
+    {
+        "id":3,
+        "color":"pink",
+        "img":"566416165.jpg",
+        "Input_ports":5
+    },
+    {
+        "id":4,
+        "color":"pink",
+        "img":"566416165.jpg",
+        "Input_ports":5
+    },
+    {
+        "id":5,
+        "color":"pink",
+        "img":"",
+        "Input_ports":5
+    }
+]
